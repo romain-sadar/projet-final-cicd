@@ -44,7 +44,7 @@ def test_create_note_missing_field(client):
 
     response = client.post("/notes", json={"title": "missing content"})
 
-    assert response.status_code == 400
+    assert response.status_code == 422 # FastAPI returns 422
 
 
 def test_get_invalid_id(client):
