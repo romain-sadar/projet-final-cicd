@@ -1,10 +1,14 @@
 from fastapi import FastAPI
 
-from .database import Base, engine
-from .routes import router
+from api.database import Base, engine
+from api.routes import router
 
 app = FastAPI(title="Notes API")
 
-Base.metadata.create_all(bind=engine)
+
+@app.on_event("startup")
+def startup():
+    Base.metadata.create_all(bind=engine)
+
 
 app.include_router(router)
