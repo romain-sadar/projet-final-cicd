@@ -30,10 +30,7 @@ def get_note(note_id: int, db: Session = Depends(get_db)):
 @router.post("/notes", status_code=201)
 def create_note(note: schemas.NoteCreate, db: Session = Depends(get_db)):
 
-    new_note = models.Note(
-        title=note.title,
-        content=note.content
-    )
+    new_note = models.Note(title=note.title, content=note.content)
 
     db.add(new_note)
     db.commit()
